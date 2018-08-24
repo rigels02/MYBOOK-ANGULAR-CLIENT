@@ -1,0 +1,29 @@
+
+<a [routerLink]="'/creat-book'" class="btn btn-success">New Book</a>    
+
+<div *ngIf="isError"  style="color: red;" >
+  {{errMsg}}
+</div>
+
+<div>
+<table  class="table table-striped">
+<tr>
+    <th>Id</th>
+    <th>Title</th>
+    <th>Author</th>
+    <th>pages</th>
+    
+</tr>
+
+<tr *ngFor="let book of books ">
+    <td>{{book.id}}</td>
+    <td> {{ book.title }} </td>
+    <td> {{ book.author }} </td>
+    <td> {{ book.pages }} </td>
+    
+    <td><input type="button" class="btn btn-success" (click) ="onEdit(book.id)" value="Edit"></td>
+    <td><input type="button" class="btn btn-warning" (click)="onDelete(book.id)" value="Delete"/></td>
+</tr>
+
+</table>
+

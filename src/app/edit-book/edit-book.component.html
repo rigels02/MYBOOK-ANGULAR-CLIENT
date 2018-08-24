@@ -1,0 +1,34 @@
+<h1>Update Book</h1>
+
+<div *ngIf="isError"  style="color: red">
+    {{errMsg}}
+ </div>
+
+
+<form [formGroup]="bookEditForm" >
+    
+  <input type="hidden" formControlName="id">
+    <label class="form-group">
+        Title:
+        <input type="text" class="form-control" formControlName="title" required>
+        
+    </label>
+    <br>
+    <label>
+        Author:
+        <input type="text" class="form-control" formControlName="author" required>
+    </label>
+    <br>
+    <label>
+        Pages:
+        <input type="number" class="form-control" formControlName="pages" required>
+    </label>
+    <br>
+   
+    <button class ="btn btn-success" (click)="updateBook()">
+        Update Book
+    </button>
+    <button class ="btn btn-warning" (click)="cancelBook()">
+        Cancel
+    </button>
+</form>

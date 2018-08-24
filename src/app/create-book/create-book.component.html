@@ -1,0 +1,34 @@
+<h1>Add Book</h1>
+
+<div *ngIf="isError"  style="color: red">
+    {{errMsg}}
+ </div>
+
+
+<form>
+    
+  <input type="hidden" [(ngModel)]="model.id" name="id">
+    <label class="form-group">
+        Title:
+        <input type="text" class="form-control" [(ngModel)]="model.title" name="title" required>
+        
+    </label>
+    <br>
+    <label>
+        Author:
+        <input type="text" class="form-control" [(ngModel)]="model.author" name="author" required>
+    </label>
+    <br>
+    <label>
+        Pages:
+        <input type="number" class="form-control" [(ngModel)]="model.pages" name="pages" required>
+    </label>
+    <br>
+   
+    <button class ="btn btn-success" (click)="createBook()">
+        Create Book
+    </button>
+    <button class ="btn btn-warning" (click)="cancelBook()">
+        Cancel
+    </button>
+</form>
