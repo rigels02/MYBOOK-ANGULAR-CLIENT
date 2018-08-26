@@ -1,5 +1,12 @@
 # My books angular client
 
+Angular client for sb-crm-angular-app
+url= http://localhost:8080/api
+
+TODO: create spring-boot: sb-mybook-angular app.
+TODO: test Angular client distr building and its including into backend (sb-mybook-angular) folder
+without/with maven plugin: com.github.eirslett:frontend-maven-plugin
+ 
 ## Rest Api endpoints
 
 Books REST API endpoints:

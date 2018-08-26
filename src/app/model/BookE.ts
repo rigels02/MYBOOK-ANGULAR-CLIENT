@@ -1,6 +1,6 @@
-export class Book{
+export class BookE{
 	constructor(
-		public file:File,
+		public coverImage:ImageBitmap,
 		public id: Number,
     	public title: string,
 		public author: string,

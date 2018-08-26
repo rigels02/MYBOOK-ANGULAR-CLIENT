@@ -17,17 +17,29 @@ export class CreateBookComponent implements OnInit {
   errMsg:String
 
   model:Book
+  selectedFile: File;
 
   constructor(private apiService: ApiService,
               private router:Router) { }
 
   ngOnInit() {
-    this.model = new Book(0,"","",0)
+    this.model = new Book(null,0,"","",0)
   }
 
+  onFileEvent(event){
+    this.selectedFile= <File>event.target.files[0]
+  }
+  
   createBook(){
     console.log("create: "+this.model)
-    this.apiService.createBook(this.model).subscribe(
+    const fd= new FormData()
+    fd.append('file',this.selectedFile)
+    fd.append('id',this.model.id.toString())
+    fd.append('title',this.model.title)
+    fd.append('author',this.model.author)
+    fd.append('pages',this.model.pages.toString())
+
+    this.apiService.createBook(fd).subscribe(
       (response) => {
         console.log(response);
         this.router.navigate(['books'])

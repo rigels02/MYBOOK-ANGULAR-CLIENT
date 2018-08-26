@@ -16,6 +16,7 @@ export class EditBookComponent implements OnInit {
   bookEditForm: FormGroup;
   isError:boolean = false;
   errMsg:String;
+  selectedFile: File;
 
   constructor(private  apiService:  ApiService, 
               private route :ActivatedRoute,
@@ -27,7 +28,7 @@ export class EditBookComponent implements OnInit {
     let currentId = this.route.snapshot.paramMap.get('id')
     //build edit form
     this.bookEditForm= this.formBuilder.group(
-    {id: [''], title: [''], author:[''],pages:[0] }
+    {id: [0], file: [], title: [''], author:[''],pages:[0] }
         )  
    this.apiService.getBookById(currentId)
    .subscribe( (data:Book) => 
@@ -45,19 +46,29 @@ export class EditBookComponent implements OnInit {
     this.bookEditForm = this.formBuilder.group(
       { 
         id: [book.id],
+        file:[],
         title: [book.title], 
         author:[book.author],
         pages:[book.pages]
        }
-          )
+      )
   }
  
+  onFileEvent(event){
+    this.selectedFile= <File>event.target.files[0]
+  }
 
   updateBook(){
    // console.log(this.bookEditForm.value)
-   var book= this.bookEditForm.value
+   var book:Book= this.bookEditForm.value
+   const fd= new FormData()
+    fd.append('file',this.selectedFile)
+    fd.append('id',book.id.toString())
+    fd.append('title',book.title)
+    fd.append('author',book.author)
+    fd.append('pages',book.pages.toString())
    
-    this.apiService.updateBook(book).subscribe((response) => {
+    this.apiService.updateBook(book.id,fd).subscribe((response) => {
         console.log(response);
         this.router.navigate(['books'])
         })

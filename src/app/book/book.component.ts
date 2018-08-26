@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router'
 import { ApiService } from '../api.service';
-import { Book } from '../model/Book';
+//import { Book } from '../model/Book';
+import { BookE } from '../model/BookE';
 
 @Component({
   selector: 'app-book',
@@ -11,13 +12,13 @@ import { Book } from '../model/Book';
 export class BookComponent implements OnInit {
   isError: boolean = false
   errMsg: String
-  books: Book[]
+  books: BookE[]
 
   constructor(private bookService: ApiService, private router:Router) { }
 
   ngOnInit() {
     this.bookService.getBooks()
-      .subscribe((data: Book[]) => { this.books = data },
+      .subscribe((data: BookE[]) => { this.books = data },
         err => {
           this.putErr(err)
         })

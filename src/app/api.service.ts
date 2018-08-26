@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Book } from './model/Book';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -15,8 +16,8 @@ export class ApiService {
     return this.httpClient.get(this.API_URL + '/books')
 
   }
-  updateBook(book:Book){
-    return this.httpClient.put(this.API_URL+'/books/'+book.id, book)
+  updateBook(id:Number, book:any){
+    return this.httpClient.put(this.API_URL+'/books/'+id, book)
   }
   deleteBook(id:Number){
     return this.httpClient.delete(this.API_URL+'/books/'+id)
@@ -25,7 +26,8 @@ export class ApiService {
 
     return this.httpClient.get(this.API_URL+'/books/'+id)
   }
-  createBook(book:Book){
+  createBook(book:any){
     return this.httpClient.post(this.API_URL+'/books/',book)
   }
+
 }
