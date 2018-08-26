@@ -1,4 +1,6 @@
-# My books angular client
+# My books angular client v2
+
+**In V2 the File upload way is going to be changed**
 
 Angular client for sb-crm-angular-app
 url= http://localhost:8080/api
