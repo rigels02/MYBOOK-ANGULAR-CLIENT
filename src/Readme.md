@@ -1,4 +1,6 @@
-# My books angular client v2
+# My books angular client v1
+
+The back-end application from this Angular client is sb-mybook-angular branch master_v1.
 
 **In V2 the File upload way is going to be changed**
 
