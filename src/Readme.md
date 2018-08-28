@@ -2,10 +2,9 @@
 
 **In V2 the File upload way is going to be changed**
 
-Angular client for sb-crm-angular-app
+Angular client for sb-mybook-angular
 url= http://localhost:8080/api
 
-TODO: create spring-boot: sb-mybook-angular app.
 TODO: test Angular client distr building and its including into backend (sb-mybook-angular) folder
 without/with maven plugin: com.github.eirslett:frontend-maven-plugin
  

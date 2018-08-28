@@ -23,7 +23,7 @@ export class CreateBookComponent implements OnInit {
               private router:Router) { }
 
   ngOnInit() {
-    this.model = new Book(null,0,"","",0)
+    this.model = new Book(null,0,"","",0,new Date())
   }
 
   onFileEvent(event){
@@ -38,6 +38,7 @@ export class CreateBookComponent implements OnInit {
     fd.append('title',this.model.title)
     fd.append('author',this.model.author)
     fd.append('pages',this.model.pages.toString())
+    fd.append('publishDate',this.model.publishDate.toString())
 
     this.apiService.createBook(fd).subscribe(
       (response) => {
@@ -47,6 +48,6 @@ export class CreateBookComponent implements OnInit {
     )
   }
   cancelBook(){
-    this.router.navigate(['books'])
+    this.router.navigate(['books']) 
   }
 }

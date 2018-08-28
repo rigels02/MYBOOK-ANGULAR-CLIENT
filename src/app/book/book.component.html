@@ -13,6 +13,7 @@
             <th>Title</th>
             <th>Author</th>
             <th>pages</th>
+            <th>Published</th>
 
         </tr>
 
@@ -28,6 +29,7 @@
             <td> {{ book.title }} </td>
             <td> {{ book.author }} </td>
             <td> {{ book.pages }} </td>
+            <td> {{ book.publishDate | date:'dd/MM/yyyy' }} </td>
 
             <td><input type="button" class="btn btn-success" (click)="onEdit(book.id)" value="Edit"></td>
             <td><input type="button" class="btn btn-warning" (click)="onDelete(book.id)" value="Delete" /></td>

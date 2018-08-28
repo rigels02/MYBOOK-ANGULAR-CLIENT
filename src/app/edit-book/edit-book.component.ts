@@ -28,7 +28,7 @@ export class EditBookComponent implements OnInit {
     let currentId = this.route.snapshot.paramMap.get('id')
     //build edit form
     this.bookEditForm= this.formBuilder.group(
-    {id: [0], file: [], title: [''], author:[''],pages:[0] }
+    {id: [0], file: [], title: [''], author:[''],pages:[0], publishDate:[] }
         )  
    this.apiService.getBookById(currentId)
    .subscribe( (data:Book) => 
@@ -49,7 +49,8 @@ export class EditBookComponent implements OnInit {
         file:[],
         title: [book.title], 
         author:[book.author],
-        pages:[book.pages]
+        pages:[book.pages],
+        publishDate:[book.publishDate]
        }
       )
   }
@@ -67,6 +68,7 @@ export class EditBookComponent implements OnInit {
     fd.append('title',book.title)
     fd.append('author',book.author)
     fd.append('pages',book.pages.toString())
+    fd.append('publishDate',book.publishDate.toString())
    
     this.apiService.updateBook(book.id,fd).subscribe((response) => {
         console.log(response);
