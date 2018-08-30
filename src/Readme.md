@@ -1,15 +1,23 @@
 # My books angular client v2
 
-The back-end application from this Angular client is sb-mybook-angular branch master_v1.
-
-**In V2 the File upload way is going to be changed**
+The back-end application from this Angular client is sb-mybook-angular branch V2.
 
 Angular client for sb-mybook-angular
 url= http://localhost:8080/api
 
 TODO: test Angular client distr building and its including into backend (sb-mybook-angular) folder
 without/with maven plugin: com.github.eirslett:frontend-maven-plugin
- 
+
+## Image upload in V2
+
+In V1 an image uploading is done with one step, just by sending FormData( book+ image) as multipart/form-data request.
+
+Image uploading in V2 is done in two steps:
+
+- post/put httpClient request with Book json object to create/update Book
+- send file FormData as multipart/form-data request to attach image for the Book
+
+
 ## Rest Api endpoints
 
 Books REST API endpoints:

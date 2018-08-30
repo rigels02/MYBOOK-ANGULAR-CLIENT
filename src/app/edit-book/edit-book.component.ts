@@ -17,6 +17,7 @@ export class EditBookComponent implements OnInit {
   isError:boolean = false;
   errMsg:String;
   selectedFile: File;
+  selectedFileName: string;
 
   constructor(private  apiService:  ApiService, 
               private route :ActivatedRoute,
@@ -28,7 +29,7 @@ export class EditBookComponent implements OnInit {
     let currentId = this.route.snapshot.paramMap.get('id')
     //build edit form
     this.bookEditForm= this.formBuilder.group(
-    {id: [0], file: [], title: [''], author:[''],pages:[0], publishDate:[] }
+    {id: [0], title: [''], file:[], author:[''],pages:[0], publishDate:[] }
         )  
    this.apiService.getBookById(currentId)
    .subscribe( (data:Book) => 
@@ -43,11 +44,12 @@ export class EditBookComponent implements OnInit {
   }
 
   private fillForm(book: Book){
+    
     this.bookEditForm = this.formBuilder.group(
       { 
         id: [book.id],
-        file:[],
         title: [book.title], 
+        file: [],
         author:[book.author],
         pages:[book.pages],
         publishDate:[book.publishDate]
@@ -62,22 +64,38 @@ export class EditBookComponent implements OnInit {
   updateBook(){
    // console.log(this.bookEditForm.value)
    var book:Book= this.bookEditForm.value
-   const fd= new FormData()
-    fd.append('file',this.selectedFile)
-    fd.append('id',book.id.toString())
-    fd.append('title',book.title)
-    fd.append('author',book.author)
-    fd.append('pages',book.pages.toString())
-    fd.append('publishDate',book.publishDate.toString())
+   var bookM:Book= new Book(book.id,book.title,book.author,book.pages,book.publishDate,null);
    
-    this.apiService.updateBook(book.id,fd).subscribe((response) => {
+    this.apiService.updateBook(book.id,bookM).subscribe((response) => {
         console.log(response);
-        this.router.navigate(['books'])
-        })
+        this.isError = false
+        if(this.selectedFile == undefined || this.selectedFile==null){
+            this.router.navigate(['books'])
+            return
+        }
+        const fd = new FormData()
+        fd.append('file',this.selectedFile)
+        this.apiService.uploadImage(book.id, fd).subscribe(
+          (response) => {
+            console.log(response)
+            this.router.navigate(['books'])
+          },
+          (error) => this.handleError(error) 
+        )
+       },
+        (error) => this.handleError(error) 
+        )
+  }
+
+  private handleError(error){
+    console.log(error); this.isError = true; this.errMsg = error;
+    window.location.reload(); 
   }
 
   cancelBook(){
     this.router.navigate(['books']) 
   }
+
+
 
 }

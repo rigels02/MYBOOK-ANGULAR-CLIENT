@@ -29,5 +29,7 @@ export class ApiService {
   createBook(book:any){
     return this.httpClient.post(this.API_URL+'/books/',book)
   }
-
+  uploadImage(id:Number, fd:FormData){
+    return this.httpClient.post(this.API_URL+'/books/image/'+id,fd)
+  }
 }
