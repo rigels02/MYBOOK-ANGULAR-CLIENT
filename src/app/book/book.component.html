@@ -20,7 +20,7 @@
         <tr *ngFor="let book of books ">
             <td>
                 <div *ngIf="book.coverImage">
-                    <img src="http://localhost:8080/api/books/imageV/{{book.id}}" height="20px" width="20px" />
+                    <img src="http://localhost:8080/api/books/imageV/{{book.id}}?{{currTime}}"   height="20px" width="20px" />
                     <a href="http://localhost:8080/api/books/imageV/{{book.id}}">View</a>
 
                 </div>

@@ -12,6 +12,7 @@ export class BookComponent implements OnInit {
   isError: boolean = false
   errMsg: String
   books: Book[]
+  currTime
 
   constructor(private bookService: ApiService, private router:Router) { }
 
@@ -19,7 +20,13 @@ export class BookComponent implements OnInit {
     this.bookService.getBooks()
       .subscribe((data: Book[]) => { 
         this.books = data 
-     
+        /**
+         * Refresh image with a new one at the same url.
+         * If for the book image is changed book.id remains the same and img src url remains 
+         * the same too. Component is not sending request to load the new image.
+         * To get rid this we are adding a cachebreaker at the end of the url.
+         */
+        this.currTime =  new Date().getTime()
       }, err => {
           this.putErr(err)
         })
