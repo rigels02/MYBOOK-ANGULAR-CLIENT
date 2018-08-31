@@ -2,7 +2,7 @@
 
 The back-end application from this Angular client is sb-mybook-angular branch master_v1.
 
-**In V2 the File upload way is going to be changed**
+**In V2 the File upload way is changed**
 
 Angular client for sb-mybook-angular
 url= http://localhost:8080/api
